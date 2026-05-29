@@ -1,0 +1,56 @@
+import csv
+import os
+
+
+expense = []
+
+while True:
+    print("\n- EXPENSE TRACKER MENU -")
+    print("1. Add Expense")
+    print("2. View Expense")
+    print("3. Calculate Total")
+    print("4. Delete Expense")
+    print("5. Exit")
+    
+    choice = input("Enter your choice: ")
+    
+    if choice == '1':
+        print("\n--- Add Expense Selected ---")
+        name = input("Enter expense name (e.g., Lunch, Rent): ")
+        
+        try:
+            amount = float(input("Enter expense amount: $"))
+        except ValueError:
+            print("Invalid price! Please enter a valid number next time.")
+            continue  
+            
+        expense.append({"name": name, "amount": amount})
+        
+        with open('expenses.csv', 'w', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=["name", "amount"])
+            writer.writeheader()
+            writer.writerows(expense)
+            
+        print(f"Successfully saved: {name} (${amount:.2f})")
+        
+    elif choice == '2':
+        print("\n--- Current Expenses ---")
+        if not expense:
+            print("No expenses recorded yet in this session.")
+        else:
+            for item in expense:
+                print(f"- {item['name']}: ${item['amount']:.2f}")
+                
+    elif choice == '3':
+        total = sum(item['amount'] for item in expense)
+        print(f"\nTotal Spent: ${total:.2f}")
+        
+    elif choice == '4':
+        print("\nDelete functionality can be added here!")
+        
+    elif choice == '5':
+        print("\nExiting program. Goodbye!")
+        break  
+        
+    else:
+        print("Invalid choice! Please select a number from 1 to 5.")
