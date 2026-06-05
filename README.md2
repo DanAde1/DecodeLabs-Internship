@@ -1,0 +1,10 @@
+# password.py
+
+A password generator that:
+- Prompts the user for desired password length
+- Builds a random password using letters, digits, and uppercase/lowercase characters
+- Prints the generated password
+
+Notes:
+- The script does not enforce special characters beyond letters and digits.
+- Input is expected to be a valid integer.
